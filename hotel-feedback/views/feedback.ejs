@@ -1,0 +1,33 @@
+<%- include("layout", { body: "" }) %>
+
+<section>
+  <h2>Submit Your Feedback</h2>
+  <form action="/submit-feedback" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="comments">Comments:</label>
+    <textarea id="comments" name="comments" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<section>
+  <h2>Feedback Received</h2>
+  <% if (feedbackEntries.length === 0) { %>
+    <p>No feedback yet. Be the first to leave a comment!</p>
+  <% } else { %>
+    <ul>
+      <% feedbackEntries.forEach(entry => { %>
+        <li>
+          <strong><%= entry.name %></strong> (<%= entry.email %>) on <%= entry.date.toDateString() %>:
+          <p><%= entry.comments %></p>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
